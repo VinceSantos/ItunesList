@@ -44,11 +44,14 @@ class HomeViewController: UIViewController, HomeViewInput {
     }
     
     func showItunesList(list: [ItunesListModel], didUpdateIndex: Int) {
-        DispatchQueue.main.async { [self] in
-            itunesCollectionList = list
-            if didUpdateIndex == -1 {
+        if didUpdateIndex == -1 {
+            DispatchQueue.main.async { [self] in
+                itunesCollectionList = list
                 collectionView.reloadData()
-            } else {
+            }
+        } else {
+            DispatchQueue.main.async { [self] in
+                itunesCollectionList = list
                 let indexPath = IndexPath(item: didUpdateIndex, section: 0)
                 collectionView.reloadItems(at: [indexPath])
             }
